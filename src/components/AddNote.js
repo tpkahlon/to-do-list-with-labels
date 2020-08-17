@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
 
-const AddNote = ({ newNote, handleChange, handleAddNote }) => {
+const AddNote = ({ isCollapse, newNote, handleChange, handleAddNote }) => {
+  const inputRef = useRef(null);
+  useEffect(() => {
+    if (isCollapse) {
+      inputRef.current.focus();
+    }
+  }, [isCollapse]);
   return (
     <form onSubmit={handleAddNote}>
       <InputGroup>
         <FormControl
+          ref={inputRef}
           placeholder='Add Note'
           aria-label='Add Note'
           aria-describedby='add-note'

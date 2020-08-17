@@ -60,6 +60,7 @@ const NotesList = ({ id, notes, isCollapse, data, setData }) => {
         handleToggleNote={handleToggleNote}
       />
       <AddNote
+        isCollapse={isCollapse}
         newNote={newNote}
         handleChange={handleChange}
         handleAddNote={handleAddNote}
