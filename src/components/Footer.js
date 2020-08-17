@@ -15,10 +15,10 @@ const Footer = () => {
           <li>Allow you to understand business logic in compliance with React Bootstrap</li>
           <li>Allow you to process editing of notes and labels through browser specific PROMPT dialogs</li>
           <li>Allow you to understand solution of multiple listing in a to-do application with prime focus on business logic and minimal overhead of styling</li>
+          <li>Allow you to understand localStorage API which save existing notes and labels when window reload action takes place</li>
         </ul>
         <h2>Further Actions</h2>
         <ul>
-          <li>Fork this project and try to implement localStorage API which save existing notes and labels when window reload action takes place</li>
           <li>Fork this project and try to add your own custom styling rather than third-party framework like Bootstrap</li>
           <li>Fork this project and try to incorporate either styled components, css modules or other popular system</li>
           <li>Fork this project and try to convert Hooks into a Redux store</li>

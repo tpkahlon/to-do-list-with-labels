@@ -6,12 +6,17 @@ import ViewLabels from './components/ViewLabels';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
+  let labels;
+  if (JSON.parse(localStorage.getItem('labels')) === null) {
+    labels = [];
+  } else {
+    labels = JSON.parse(localStorage.getItem('labels'));
+  }
   const initialState = {
     addLabel: '',
-    labels: [],
+    labels,
   };
   const [data, setData] = useState(initialState);
-  const { labels } = data;
   const handleAddLabel = (e) => {
     e.preventDefault();
     const value = e.target.elements[0].value.toLowerCase();
@@ -28,14 +33,16 @@ const App = () => {
       setData({ ...data, addLabel: '' });
       return;
     }
+    const newLabel = labels.concat({
+      id: labels.length,
+      name: e.target.elements[0].value.toLowerCase(),
+      isCollapse: false,
+      notes: [],
+    });
+    localStorage.setItem('labels', JSON.stringify(newLabel));
     setData({
       ...data,
-      labels: labels.concat({
-        id: labels.length,
-        name: e.target.elements[0].value.toLowerCase(),
-        isCollapse: false,
-        notes: [],
-      }),
+      labels: newLabel,
       addLabel: '',
     });
   };
@@ -46,6 +53,7 @@ const App = () => {
       const newLabels = [...labels];
       const currentItemIndex = newLabels.findIndex((i) => i.id === id);
       newLabels[currentItemIndex].name = newName;
+      localStorage.setItem('labels', JSON.stringify(newLabels));
       setData({ ...data, labels: newLabels });
     }
   };
@@ -53,6 +61,7 @@ const App = () => {
     const newLabels = [...labels];
     const currentItemIndex = newLabels.findIndex((i) => i.id === id);
     newLabels.splice(currentItemIndex, 1);
+    localStorage.setItem('labels', JSON.stringify(newLabels));
     setData({ ...data, labels: newLabels });
   };
   const handleCollapseLabel = (e, id, isCollapse) => {
@@ -60,6 +69,7 @@ const App = () => {
     const currentItemIndex = newLabels.findIndex((i) => i.id === id);
     newLabels[currentItemIndex].isCollapse = !newLabels[currentItemIndex]
       .isCollapse;
+    localStorage.setItem('labels', JSON.stringify(newLabels));
     setData({ ...data, labels: newLabels });
   };
   const handleChange = (e) => {
