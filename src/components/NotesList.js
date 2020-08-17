@@ -51,7 +51,7 @@ const NotesList = ({ id, notes, isCollapse, data, setData }) => {
     setData({ ...data, labels });
   };
   return (
-    <div className={isCollapse ? 'show' : 'hide'}>
+    <div className={isCollapse ? 'd-block' : 'd-none'}>
       <ViewNotes
         notes={notes}
         handleChange={handleChange}

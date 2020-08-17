@@ -3,7 +3,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import AddLabel from './components/AddLabel';
 import Footer from './components/Footer';
 import ViewLabels from './components/ViewLabels';
-import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
