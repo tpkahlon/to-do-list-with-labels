@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
-import { FaPlus } from "react-icons/fa";
+import { FaPlus } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 const AddLabel = ({ data, handleChange, handleAddLabel }) => {
   const { addLabel } = data;
@@ -21,8 +22,8 @@ const AddLabel = ({ data, handleChange, handleAddLabel }) => {
           onChange={handleChange}
         />
         <InputGroup.Append>
-          <Button type="submit" variant='outline-success'>
-            <div className="d-flex align-items-center">
+          <Button type='submit' variant='outline-success'>
+            <div className='d-flex align-items-center'>
               <FaPlus />
             </div>
           </Button>
@@ -30,6 +31,21 @@ const AddLabel = ({ data, handleChange, handleAddLabel }) => {
       </InputGroup>
     </form>
   );
+};
+
+AddLabel.defaultProps = {
+  data: {
+    addLabel: '',
+    labels: [],
+  },
+  handleChange: () => {},
+  handleAddLabel: () => {},
+};
+
+AddLabel.propTypes = {
+  data: PropTypes.instanceOf(Object),
+  handleChange: PropTypes.func,
+  handleAddLabel: PropTypes.func,
 };
 
 export default AddLabel;

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 const AddNote = ({ isCollapse, newNote, handleChange, handleAddNote }) => {
   const inputRef = useRef(null);
@@ -30,6 +31,20 @@ const AddNote = ({ isCollapse, newNote, handleChange, handleAddNote }) => {
       </InputGroup>
     </form>
   );
+};
+
+AddNote.defaultProps = {
+  isCollapse: false,
+  newNote: '',
+  handleChange: () => {},
+  handleAddNote: () => {},
+};
+
+AddNote.propTypes = {
+  isCollapse: PropTypes.bool,
+  newNote: PropTypes.string,
+  handleChange: PropTypes.func,
+  handleAddNote: PropTypes.func,
 };
 
 export default AddNote;

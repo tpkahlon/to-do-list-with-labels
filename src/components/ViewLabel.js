@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, ButtonGroup, Badge, ListGroup } from 'react-bootstrap';
 import { FaPencilAlt, FaTrash, FaBars } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 import NotesList from './NotesList';
 
 const ViewLabel = ({
@@ -17,7 +18,10 @@ const ViewLabel = ({
     <ListGroup className='mb-3 shadow-lg'>
       <ListGroup.Item>
         <div className='d-flex align-items-center justify-content-between'>
-          <Badge variant='secondary' className='text-uppercase text-truncate mr-3'>
+          <Badge
+            variant='secondary'
+            className='text-uppercase text-truncate mr-3'
+          >
             {name}
           </Badge>
           <ButtonGroup aria-label='Label buttons'>
@@ -52,6 +56,34 @@ const ViewLabel = ({
       </ListGroup.Item>
     </ListGroup>
   );
+};
+
+ViewLabel.defaultProps = {
+  item: {
+    id: 0,
+    name: '',
+    isCollapse: false,
+    notes: [],
+  },
+  data: {
+    addLabel: '',
+    labels: [],
+  },
+  setData: () => {},
+  handleChange: () => {},
+  handleEditLabel: () => {},
+  handleDeleteLabel: () => {},
+  handleCollapseLabel: () => {},
+};
+
+ViewLabel.propTypes = {
+  item: PropTypes.instanceOf(Object),
+  data: PropTypes.instanceOf(Object),
+  setData: PropTypes.func,
+  handleChange: PropTypes.func,
+  handleEditLabel: PropTypes.func,
+  handleDeleteLabel: PropTypes.func,
+  handleCollapseLabel: PropTypes.func,
 };
 
 export default ViewLabel;

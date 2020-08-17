@@ -1,10 +1,10 @@
 import React from 'react';
 import { Card, Button, ButtonGroup } from 'react-bootstrap';
 import { FaPencilAlt, FaTrash, FaExchangeAlt } from 'react-icons/fa';
+import PropTypes from 'prop-types';
 
 const ViewNote = ({
   item,
-  handleChange,
   handleEditNote,
   handleDeleteNote,
   handleToggleNote,
@@ -45,6 +45,25 @@ const ViewNote = ({
       </Card.Body>
     </Card>
   );
+};
+
+ViewNote.defaultProps = {
+  item: {
+    id: 0,
+    name: '',
+    isCollapse: false,
+    notes: [],
+  },
+  handleEditNote: () => {},
+  handleDeleteNote: () => {},
+  handleToggleNote: () => {},
+};
+
+ViewNote.propTypes = {
+  item: PropTypes.instanceOf(Object),
+  handleEditNote: PropTypes.func,
+  handleDeleteNote: PropTypes.func,
+  handleToggleNote: PropTypes.func,
 };
 
 export default ViewNote;

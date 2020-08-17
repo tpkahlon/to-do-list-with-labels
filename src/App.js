@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+
 import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import AddLabel from './components/AddLabel';
@@ -21,7 +23,7 @@ const App = () => {
     e.preventDefault();
     const value = e.target.elements[0].value.toLowerCase();
     if (value.trim() === '') {
-      alert(`Please enter a label.`);
+      alert('Please enter a label.');
       setData({ ...data, addLabel: '' });
       return;
     }
@@ -29,7 +31,7 @@ const App = () => {
       labels.length !== 0 &&
       labels.map((i) => i.name.toLowerCase()).includes(value.toLowerCase())
     ) {
-      alert(`This label already exists.`);
+      alert('This label already exists.');
       setData({ ...data, addLabel: '' });
       return;
     }
@@ -49,13 +51,12 @@ const App = () => {
   const handleEditLabel = (e, id) => {
     const newName = prompt('Enter revised label name');
     if (newName === null) return;
-    else {
-      const newLabels = [...labels];
-      const currentItemIndex = newLabels.findIndex((i) => i.id === id);
-      newLabels[currentItemIndex].name = newName;
-      localStorage.setItem('labels', JSON.stringify(newLabels));
-      setData({ ...data, labels: newLabels });
-    }
+
+    const newLabels = [...labels];
+    const currentItemIndex = newLabels.findIndex((i) => i.id === id);
+    newLabels[currentItemIndex].name = newName;
+    localStorage.setItem('labels', JSON.stringify(newLabels));
+    setData({ ...data, labels: newLabels });
   };
   const handleDeleteLabel = (e, id) => {
     const newLabels = [...labels];
@@ -64,7 +65,7 @@ const App = () => {
     localStorage.setItem('labels', JSON.stringify(newLabels));
     setData({ ...data, labels: newLabels });
   };
-  const handleCollapseLabel = (e, id, isCollapse) => {
+  const handleCollapseLabel = (e, id) => {
     const newLabels = [...labels];
     const currentItemIndex = newLabels.findIndex((i) => i.id === id);
     newLabels[currentItemIndex].isCollapse = !newLabels[currentItemIndex]

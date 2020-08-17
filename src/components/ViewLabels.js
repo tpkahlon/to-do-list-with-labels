@@ -1,4 +1,7 @@
+/* eslint-disable react/no-array-index-key */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 import ViewLabel from './ViewLabel';
 
 const ViewLabels = ({
@@ -27,6 +30,27 @@ const ViewLabels = ({
       ))}
     </>
   );
+};
+
+ViewLabels.defaultProps = {
+  data: {
+    addLabel: '',
+    labels: [],
+  },
+  setData: () => {},
+  handleChange: () => {},
+  handleEditLabel: () => {},
+  handleDeleteLabel: () => {},
+  handleCollapseLabel: () => {},
+};
+
+ViewLabels.propTypes = {
+  data: PropTypes.instanceOf(Object),
+  setData: PropTypes.func,
+  handleChange: PropTypes.func,
+  handleEditLabel: PropTypes.func,
+  handleDeleteLabel: PropTypes.func,
+  handleCollapseLabel: PropTypes.func,
 };
 
 export default ViewLabels;

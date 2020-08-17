@@ -1,9 +1,11 @@
+/* eslint-disable react/no-array-index-key */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 import ViewNote from './ViewNote';
 
 const ViewNotes = ({
   notes,
-  handleChange,
   handleEditNote,
   handleDeleteNote,
   handleToggleNote,
@@ -15,7 +17,6 @@ const ViewNotes = ({
         <ViewNote
           key={index}
           item={item}
-          handleChange={handleChange}
           handleEditNote={handleEditNote}
           handleDeleteNote={handleDeleteNote}
           handleToggleNote={handleToggleNote}
@@ -23,6 +24,20 @@ const ViewNotes = ({
       ))}
     </>
   );
+};
+
+ViewNotes.defaultProps = {
+  notes: [],
+  handleEditNote: () => {},
+  handleDeleteNote: () => {},
+  handleToggleNote: () => {},
+};
+
+ViewNotes.propTypes = {
+  notes: PropTypes.instanceOf(Array),
+  handleEditNote: PropTypes.func,
+  handleDeleteNote: PropTypes.func,
+  handleToggleNote: PropTypes.func,
 };
 
 export default ViewNotes;
