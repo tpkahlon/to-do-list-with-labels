@@ -27,7 +27,7 @@ Label-friendly To-do listing built with React Hooks
 
 ## Scale
 
-- Fork this project and try to add your own custom styling rather than third- party framework like Bootstrap
+- Fork this project and try to add your own custom styling rather than third-party framework like Bootstrap
 - Fork this project and try to incorporate either styled components, css modules or other popular system
 - Fork this project and try to convert Hooks into a Redux store
 - Fork this project and try to replace Hooks with Context API
