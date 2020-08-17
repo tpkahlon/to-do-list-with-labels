@@ -1,5 +1,6 @@
 import React from 'react';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
+import { FaPlus } from 'react-icons/fa';
 
 const AddNote = ({ newNote, handleChange, handleAddNote }) => {
   return (
@@ -13,8 +14,10 @@ const AddNote = ({ newNote, handleChange, handleAddNote }) => {
           onChange={handleChange}
         />
         <InputGroup.Append>
-          <Button type='submit' variant='outline-secondary'>
-            Add Note
+          <Button type='submit' variant='outline-success'>
+            <div className='d-flex align-items-center'>
+              <FaPlus />
+            </div>
           </Button>
         </InputGroup.Append>
       </InputGroup>
