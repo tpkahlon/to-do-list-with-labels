@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import AddLabel from './components/AddLabel';
 import Footer from './components/Footer';
@@ -19,6 +19,11 @@ const App = () => {
     labels,
   };
   const [data, setData] = useState(initialState);
+
+  const labelRef = useRef(null);
+  useEffect(() => {
+    labelRef.current.focus();
+  }, []);
   const handleAddLabel = (e) => {
     e.preventDefault();
     const value = e.target.elements[0].value.toLowerCase();
@@ -51,12 +56,12 @@ const App = () => {
   const handleEditLabel = (e, id) => {
     const newName = prompt('Enter revised label name');
     if (newName === null) return;
-
     const newLabels = [...labels];
     const currentItemIndex = newLabels.findIndex((i) => i.id === id);
     newLabels[currentItemIndex].name = newName;
     localStorage.setItem('labels', JSON.stringify(newLabels));
     setData({ ...data, labels: newLabels });
+    labelRef.current.focus();
   };
   const handleDeleteLabel = (e, id) => {
     const newLabels = [...labels];
@@ -64,14 +69,17 @@ const App = () => {
     newLabels.splice(currentItemIndex, 1);
     localStorage.setItem('labels', JSON.stringify(newLabels));
     setData({ ...data, labels: newLabels });
+    labelRef.current.focus();
   };
   const handleCollapseLabel = (e, id) => {
     const newLabels = [...labels];
     const currentItemIndex = newLabels.findIndex((i) => i.id === id);
     newLabels[currentItemIndex].isCollapse = !newLabels[currentItemIndex]
-      .isCollapse;
+    .isCollapse;
     localStorage.setItem('labels', JSON.stringify(newLabels));
     setData({ ...data, labels: newLabels });
+
+    if(!newLabels[currentItemIndex].isCollapse) labelRef.current.focus();
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -82,6 +90,7 @@ const App = () => {
       <Row>
         <Col xs={12}>
           <AddLabel
+            labelRef={labelRef}
             data={data}
             handleChange={handleChange}
             handleAddLabel={handleAddLabel}

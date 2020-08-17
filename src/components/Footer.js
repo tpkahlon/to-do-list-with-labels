@@ -13,8 +13,8 @@ const Footer = () => (
         </li>
         <li>
           Allow you to mark your notes as
-          <strong>Complete</strong> or
-          <strong>Incomplete</strong>
+          <strong>&nbsp;Complete</strong> or
+          <strong>&nbsp;Incomplete</strong>
         </li>
         <li>
           Allow you to perform minimal checks to avoid redundancy in labels and

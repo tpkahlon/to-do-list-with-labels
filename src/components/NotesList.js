@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import AddNote from './AddNote';
 import ViewNotes from './ViewNotes';
@@ -13,6 +13,13 @@ const NotesList = ({ id, notes, isCollapse, data, setData }) => {
   } else {
     labels = JSON.parse(localStorage.getItem('labels'));
   }
+
+  const noteRef = useRef(null);
+  useEffect(() => {
+    if (isCollapse) {
+      noteRef.current.focus();
+    }
+  }, [isCollapse]);
   const handleChange = (e) => {
     setNewNote(e.target.value);
   };
@@ -43,6 +50,8 @@ const NotesList = ({ id, notes, isCollapse, data, setData }) => {
     localStorage.setItem('labels', JSON.stringify(labels));
     setNewNote('');
     setData({ ...data, labels });
+
+    noteRef.current.focus();
   };
   const handleEditNote = (e, noteId) => {
     const newName = prompt('Enter revised label name');
@@ -57,6 +66,8 @@ const NotesList = ({ id, notes, isCollapse, data, setData }) => {
     labels[currentLabelIndex].notes = newNotes;
     localStorage.setItem('labels', JSON.stringify(labels));
     setData({ ...data, labels });
+
+    noteRef.current.focus();
   };
   const handleDeleteNote = (e, noteId) => {
     const newNotes = [...notes];
@@ -68,6 +79,8 @@ const NotesList = ({ id, notes, isCollapse, data, setData }) => {
     labels[currentLabelIndex].notes = newNotes;
     localStorage.setItem('labels', JSON.stringify(labels));
     setData({ ...data, labels });
+
+    noteRef.current.focus();
   };
   const handleToggleNote = (e, noteId) => {
     const newNotes = [...notes];
@@ -80,6 +93,8 @@ const NotesList = ({ id, notes, isCollapse, data, setData }) => {
     labels[currentLabelIndex].notes = newNotes;
     localStorage.setItem('labels', JSON.stringify(labels));
     setData({ ...data, labels });
+
+    noteRef.current.focus();
   };
   return (
     <div className={isCollapse ? 'd-block' : 'd-none'}>
@@ -90,6 +105,7 @@ const NotesList = ({ id, notes, isCollapse, data, setData }) => {
         handleToggleNote={handleToggleNote}
       />
       <AddNote
+        noteRef={noteRef}
         isCollapse={isCollapse}
         newNote={newNote}
         handleChange={handleChange}

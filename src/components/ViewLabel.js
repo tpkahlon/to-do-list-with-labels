@@ -16,11 +16,11 @@ const ViewLabel = ({
   const { id, name, notes, isCollapse } = item;
   return (
     <ListGroup className='mb-3 shadow-lg'>
-      <ListGroup.Item>
+      <ListGroup.Item className='p-3'>
         <div className='d-flex align-items-center justify-content-between'>
           <Badge
             variant='secondary'
-            className='text-uppercase text-truncate mr-3'
+            className='text-uppercase text-truncate mr-3 display-1'
           >
             {name}
           </Badge>

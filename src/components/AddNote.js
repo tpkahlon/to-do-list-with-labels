@@ -1,20 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
-const AddNote = ({ isCollapse, newNote, handleChange, handleAddNote }) => {
-  const inputRef = useRef(null);
-  useEffect(() => {
-    if (isCollapse) {
-      inputRef.current.focus();
-    }
-  }, [isCollapse]);
+const AddNote = ({
+  noteRef,
+  isCollapse,
+  newNote,
+  handleChange,
+  handleAddNote,
+}) => {
   return (
     <form onSubmit={handleAddNote}>
       <InputGroup>
         <FormControl
-          ref={inputRef}
+          ref={noteRef}
           placeholder='Add Note'
           aria-label='Add Note'
           aria-describedby='add-note'
@@ -34,6 +34,7 @@ const AddNote = ({ isCollapse, newNote, handleChange, handleAddNote }) => {
 };
 
 AddNote.defaultProps = {
+  noteRef: {},
   isCollapse: false,
   newNote: '',
   handleChange: () => {},
@@ -41,6 +42,7 @@ AddNote.defaultProps = {
 };
 
 AddNote.propTypes = {
+  noteRef: PropTypes.instanceOf(Object),
   isCollapse: PropTypes.bool,
   newNote: PropTypes.string,
   handleChange: PropTypes.func,

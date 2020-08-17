@@ -1,19 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
-const AddLabel = ({ data, handleChange, handleAddLabel }) => {
+const AddLabel = ({ labelRef, data, handleChange, handleAddLabel }) => {
   const { addLabel } = data;
-  const inputRef = useRef(null);
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
   return (
     <form onSubmit={handleAddLabel}>
       <InputGroup className='mb-3'>
         <FormControl
-          ref={inputRef}
+          ref={labelRef}
           placeholder='Add Label'
           aria-label='Add Label'
           aria-describedby='add-label'
@@ -38,12 +34,14 @@ AddLabel.defaultProps = {
     addLabel: '',
     labels: [],
   },
+  labelRef: {},
   handleChange: () => {},
   handleAddLabel: () => {},
 };
 
 AddLabel.propTypes = {
   data: PropTypes.instanceOf(Object),
+  labelRef: PropTypes.instanceOf(Object),
   handleChange: PropTypes.func,
   handleAddLabel: PropTypes.func,
 };
