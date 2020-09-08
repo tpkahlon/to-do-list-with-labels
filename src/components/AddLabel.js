@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
 import LabelContext from './LabelContext';
+import { isEqual } from 'lodash';
 
 const AddLabel = () => {
   const { data, labelRef, handleAddLabel, handleChange } = useContext(
@@ -32,4 +33,9 @@ const AddLabel = () => {
   );
 };
 
-export default AddLabel;
+const areEqual = (prevProps, nextProps) => {
+  if (!isEqual(prevProps, nextProps)) return true;
+  else return false;
+};
+
+export default React.memo(AddLabel, areEqual);
