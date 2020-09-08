@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Card, Button, ButtonGroup } from 'react-bootstrap';
 import { FaPencilAlt, FaTrash, FaExchangeAlt } from 'react-icons/fa';
+import NoteContext from './NoteContext';
 import PropTypes from 'prop-types';
 
-const ViewNote = ({
-  item,
-  handleEditNote,
-  handleDeleteNote,
-  handleToggleNote,
-}) => {
+const ViewNote = ({ item }) => {
   const { id, name, isComplete } = item;
+  const { handleEditNote, handleDeleteNote, handleToggleNote } = useContext(
+    NoteContext
+  );
   return (
     <Card
       className='my-3 shadow'
@@ -54,16 +53,10 @@ ViewNote.defaultProps = {
     isCollapse: false,
     notes: [],
   },
-  handleEditNote: () => {},
-  handleDeleteNote: () => {},
-  handleToggleNote: () => {},
 };
 
 ViewNote.propTypes = {
   item: PropTypes.instanceOf(Object),
-  handleEditNote: PropTypes.func,
-  handleDeleteNote: PropTypes.func,
-  handleToggleNote: PropTypes.func,
 };
 
 export default ViewNote;

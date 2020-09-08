@@ -1,12 +1,17 @@
 /* eslint-disable no-alert */
 
-import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import AddNote from './AddNote';
 import ViewNotes from './ViewNotes';
+import LabelContext from './LabelContext';
+import NoteContext from './NoteContext';
+import PropTypes from 'prop-types';
 
-const NotesList = ({ id, notes, isCollapse, data, setData }) => {
+const NotesList = ({ id, notes, isCollapse }) => {
+  const { data, setData } = useContext(LabelContext);
+
   const [newNote, setNewNote] = useState('');
+
   let labels;
   if (JSON.parse(localStorage.getItem('labels')) === null) {
     labels = [];
@@ -20,6 +25,7 @@ const NotesList = ({ id, notes, isCollapse, data, setData }) => {
       noteRef.current.focus();
     }
   }, [isCollapse]);
+
   const handleChange = (e) => {
     setNewNote(e.target.value);
   };
@@ -96,22 +102,26 @@ const NotesList = ({ id, notes, isCollapse, data, setData }) => {
 
     noteRef.current.focus();
   };
+
   return (
-    <div className={isCollapse ? 'd-block' : 'd-none'}>
-      <ViewNotes
-        notes={notes}
-        handleEditNote={handleEditNote}
-        handleDeleteNote={handleDeleteNote}
-        handleToggleNote={handleToggleNote}
-      />
-      <AddNote
-        noteRef={noteRef}
-        isCollapse={isCollapse}
-        newNote={newNote}
-        handleChange={handleChange}
-        handleAddNote={handleAddNote}
-      />
-    </div>
+    <NoteContext.Provider
+      value={{
+        notes,
+        isCollapse,
+        noteRef,
+        newNote,
+        handleChange,
+        handleAddNote,
+        handleEditNote,
+        handleDeleteNote,
+        handleToggleNote,
+      }}
+    >
+      <div className={isCollapse ? 'd-block' : 'd-none'}>
+        <ViewNotes />
+        <AddNote />
+      </div>
+    </NoteContext.Provider>
   );
 };
 
@@ -119,19 +129,12 @@ NotesList.defaultProps = {
   id: 0,
   notes: [],
   isCollapse: false,
-  data: {
-    addLabel: '',
-    labels: [],
-  },
-  setData: () => {},
 };
 
 NotesList.propTypes = {
   id: PropTypes.number,
   notes: PropTypes.instanceOf(Array),
   isCollapse: PropTypes.bool,
-  data: PropTypes.instanceOf(Object),
-  setData: PropTypes.func,
 };
 
 export default NotesList;

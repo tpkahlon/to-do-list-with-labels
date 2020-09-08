@@ -1,6 +1,6 @@
 # To-Do-List-With-Labels
 
-Label-friendly To-do listing built with React Hooks
+Label-friendly To-do listing built with React Hooks and Context
 
 ## Production
 

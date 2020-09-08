@@ -1,15 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
-import PropTypes from 'prop-types';
+import NoteContext from './NoteContext';
 
-const AddNote = ({
-  noteRef,
-  isCollapse,
-  newNote,
-  handleChange,
-  handleAddNote,
-}) => {
+const AddNote = () => {
+  const { noteRef, newNote, handleChange, handleAddNote } = useContext(
+    NoteContext
+  );
   return (
     <form onSubmit={handleAddNote}>
       <InputGroup>
@@ -31,22 +28,6 @@ const AddNote = ({
       </InputGroup>
     </form>
   );
-};
-
-AddNote.defaultProps = {
-  noteRef: {},
-  isCollapse: false,
-  newNote: '',
-  handleChange: () => {},
-  handleAddNote: () => {},
-};
-
-AddNote.propTypes = {
-  noteRef: PropTypes.instanceOf(Object),
-  isCollapse: PropTypes.bool,
-  newNote: PropTypes.string,
-  handleChange: PropTypes.func,
-  handleAddNote: PropTypes.func,
 };
 
 export default AddNote;

@@ -1,19 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, ButtonGroup, Badge, ListGroup } from 'react-bootstrap';
 import { FaPencilAlt, FaTrash, FaBars } from 'react-icons/fa';
-import PropTypes from 'prop-types';
 import NotesList from './NotesList';
+import LabelContext from './LabelContext';
+import PropTypes from 'prop-types';
 
-const ViewLabel = ({
-  item,
-  data,
-  setData,
-  handleChange,
-  handleEditLabel,
-  handleDeleteLabel,
-  handleCollapseLabel,
-}) => {
+const ViewLabel = ({ item }) => {
   const { id, name, notes, isCollapse } = item;
+  const {
+    handleEditLabel,
+    handleDeleteLabel,
+    handleCollapseLabel,
+  } = useContext(LabelContext);
   return (
     <ListGroup className='mb-3 shadow-lg'>
       <ListGroup.Item className='p-3'>
@@ -45,14 +43,7 @@ const ViewLabel = ({
             </Button>
           </ButtonGroup>
         </div>
-        <NotesList
-          notes={notes}
-          data={data}
-          id={id}
-          setData={setData}
-          isCollapse={isCollapse}
-          handleChange={handleChange}
-        />
+        <NotesList id={id} notes={notes} isCollapse={isCollapse} />
       </ListGroup.Item>
     </ListGroup>
   );
@@ -65,25 +56,10 @@ ViewLabel.defaultProps = {
     isCollapse: false,
     notes: [],
   },
-  data: {
-    addLabel: '',
-    labels: [],
-  },
-  setData: () => {},
-  handleChange: () => {},
-  handleEditLabel: () => {},
-  handleDeleteLabel: () => {},
-  handleCollapseLabel: () => {},
 };
 
 ViewLabel.propTypes = {
   item: PropTypes.instanceOf(Object),
-  data: PropTypes.instanceOf(Object),
-  setData: PropTypes.func,
-  handleChange: PropTypes.func,
-  handleEditLabel: PropTypes.func,
-  handleDeleteLabel: PropTypes.func,
-  handleCollapseLabel: PropTypes.func,
 };
 
 export default ViewLabel;

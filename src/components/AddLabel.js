@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { InputGroup, FormControl, Button } from 'react-bootstrap';
 import { FaPlus } from 'react-icons/fa';
-import PropTypes from 'prop-types';
+import LabelContext from './LabelContext';
 
-const AddLabel = ({ labelRef, data, handleChange, handleAddLabel }) => {
+const AddLabel = () => {
+  const { data, labelRef, handleAddLabel, handleChange } = useContext(
+    LabelContext
+  );
   const { addLabel } = data;
   return (
     <form onSubmit={handleAddLabel}>
@@ -27,23 +30,6 @@ const AddLabel = ({ labelRef, data, handleChange, handleAddLabel }) => {
       </InputGroup>
     </form>
   );
-};
-
-AddLabel.defaultProps = {
-  data: {
-    addLabel: '',
-    labels: [],
-  },
-  labelRef: {},
-  handleChange: () => {},
-  handleAddLabel: () => {},
-};
-
-AddLabel.propTypes = {
-  data: PropTypes.instanceOf(Object),
-  labelRef: PropTypes.instanceOf(Object),
-  handleChange: PropTypes.func,
-  handleAddLabel: PropTypes.func,
 };
 
 export default AddLabel;

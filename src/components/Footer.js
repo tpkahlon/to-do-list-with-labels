@@ -4,7 +4,7 @@ const Footer = () => (
   <>
     <hr />
     <footer>
-      <h1>To-Do-List-With-Labels using React Hooks</h1>
+      <h1>To-Do-List-With-Labels using React Hooks and Context</h1>
       <ul>
         <li>Allow you to create listing of notes separated by labels</li>
         <li>
