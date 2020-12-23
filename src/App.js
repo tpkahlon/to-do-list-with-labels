@@ -58,7 +58,10 @@ const App = () => {
   };
   const handleEditLabel = (e, id) => {
     const newName = prompt('Enter revised label name');
-    if (newName === null) return;
+    if (newName === null || newName.trim() === '') {
+      alert('Please enter a label.');
+      return;
+    }
     const newLabels = [...labels];
     const currentItemIndex = newLabels.findIndex((i) => i.id === id);
     newLabels[currentItemIndex].name = newName;
